@@ -28,30 +28,34 @@
 
             <button type="submit">Sign Up</button>
         </form>
+
         <p class="redirect-text">Already have an account? <a href="login.html">Login here</a>.</p>
     </div>
 
     <script src="auth.js"></script>
     <script>
+        // Check if the user is already authenticated
         if (checkAuth()) {
-            window.location.href = 'index.html';
+            window.location.href = 'index.html'; // Redirect to index if logged in
         }
 
         const signupForm = document.getElementById('signup-form');
         const errorMessage = document.getElementById('error-message');
 
         signupForm.addEventListener('submit', (event) => {
-            event.preventDefault();
+            event.preventDefault(); // Prevent the default form submission
 
+            // Get input values
             const username = document.getElementById('new-username').value;
             const email = document.getElementById('new-email').value; 
             const password = document.getElementById('new-password').value;
 
+            // Attempt to register the user
             if (register(username, email, password)) {
                 alert('Account created successfully! You can now log in.');
-                window.location.href = 'login.html';
+                window.location.href = 'login.html'; // Redirect to login after successful registration
             } else {
-                errorMessage.textContent = 'Username or email already exists!';
+                errorMessage.textContent = 'Username or email already exists!'; // Display error message
             }
         });
     </script>
