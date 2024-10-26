@@ -33,11 +33,9 @@ recognition.addEventListener('end', () => {
     startButton.disabled = false;
 });
 
-
 recognition.addEventListener('start', () => {
     updateButtonState(true);
 });
-
 
 function updateButtonState(isListening) {
     startButton.innerHTML = isListening
@@ -83,7 +81,6 @@ function calculateResult(input) {
     }
 }
 
-
 function calculatePercentOf(input) {
     let parts = input.includes('percent of') 
         ? input.split('percent of') 
@@ -95,20 +92,16 @@ function calculatePercentOf(input) {
     displayResult(`${value} percent of ${total} = ${result}`, result);
 }
 
-
 function calculateSquareRoot(input) {
     const value = extractNumber(input);
     const result = Math.sqrt(value);
     displayResult(`Square root of ${value} = ${result}`, result);
 }
-
-
 function calculateSquare(input) {
     const value = extractNumber(input);
     const result = Math.pow(value, 2);
     displayResult(`Square of ${value} = ${result}`, result);
 }
-
 
 function convertCelsiusToFahrenheit(input) {
     const value = extractNumber(input);
@@ -116,13 +109,11 @@ function convertCelsiusToFahrenheit(input) {
     displayResult(`${value} Celsius to Fahrenheit = ${result}`, result);
 }
 
-
 function convertFahrenheitToCelsius(input) {
     const value = extractNumber(input);
     const result = (value - 32) * 5 / 9;
     displayResult(`${value} Fahrenheit to Celsius = ${result}`, result);
 }
-
 
 function evaluateExpression(lowerInput, originalInput) {
     const formattedInput = lowerInput
@@ -133,7 +124,7 @@ function evaluateExpression(lowerInput, originalInput) {
         .replace(/divided by/g, '/')
         .replace(/x/g, '*');
 
-    const result = eval(formattedInput); // Use eval with caution
+    const result = eval(formattedInput); 
     displayResult(`${originalInput} = ${result}`, result);
 }
 
@@ -143,13 +134,11 @@ function extractNumber(input) {
     return matches ? parseFloat(matches[0]) : 0;
 }
 
-
 function displayResult(resultText, result) {
     updateResult(resultText, '');
     resultDiv.classList.remove('error');
     addToHistory(resultText);
 }
-
 
 function addToHistory(calculation) {
     const listItem = document.createElement('li');
