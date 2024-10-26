@@ -35,27 +35,26 @@
     <script src="auth.js"></script>
     <script>
         if (checkAuth()) {
-            window.location.href = 'home.html'; // Redirect to home if logged in
+            window.location.href = 'home.html'; 
         }
 
         const signupForm = document.getElementById('signup-form');
         const errorMessage = document.getElementById('error-message');
 
         signupForm.addEventListener('submit', (event) => {
-            event.preventDefault(); // Prevent the default form submission
+            event.preventDefault(); 
 
-            // Get input values
+        
             const username = document.getElementById('new-username').value;
             const email = document.getElementById('new-email').value; 
             const password = document.getElementById('new-password').value;
 
-            // Attempt to register the user
             if (register(username, email, password)) {
                 alert('Account created successfully! You can now log in.');
                 signupForm.reset(); // Clear the form
-                window.location.href = 'index.html'; // Redirect to login after successful registration
+                window.location.href = 'index.html'; 
             } else {
-                errorMessage.textContent = 'Username or email already exists!'; // Display error message
+                errorMessage.textContent = 'Username or email already exists!'; 
             }
         });
     </script>
