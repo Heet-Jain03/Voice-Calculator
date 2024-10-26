@@ -31,7 +31,7 @@
 
     <script src="auth.js"></script>
     <script>
-        // Redirect to home if already authenticated
+     
         if (checkAuth()) {
             window.location.href = 'home.html';
         }
@@ -46,7 +46,7 @@
             const password = document.getElementById('password').value;
 
             if (login(username, password)) {
-                window.location.href = 'home.html'; // Redirect to home page on successful login
+                window.location.href = 'home.html'; /
             } else {
                 errorMessage.textContent = 'Invalid username or password! Please try again.';
                 errorMessage.style.color = 'red';
