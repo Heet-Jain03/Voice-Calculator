@@ -23,7 +23,7 @@ function register(username, email, password) {
     const emailExists = Object.values(users).some(user => user.email === email);
 
     if (usernameExists || emailExists) {
-        return false; r
+        return false; 
     }
 
     users[username] = { email: email, password: password };
