@@ -52,6 +52,7 @@
             // Attempt to register the user
             if (register(username, email, password)) {
                 alert('Account created successfully! You can now log in.');
+                signupForm.reset(); // Clear the form
                 window.location.href = 'index.html'; // Redirect to login after successful registration
             } else {
                 errorMessage.textContent = 'Username or email already exists!'; // Display error message
