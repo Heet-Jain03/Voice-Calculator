@@ -21,12 +21,12 @@ function register(username, email, password) {
     const emailExists = Object.values(users).some(user => user.email === email);
 
     if (usernameExists || emailExists) {
-        return false; // Registration failed due to existing user
+        return false; 
     }
 
     users[username] = { email: email, password: password };
     localStorage.setItem('users', JSON.stringify(users));
-    return true; // Registration successful
+    return true; 
 }
 
 function logout() {
