@@ -31,7 +31,7 @@
 
     <script src="auth.js"></script>
     <script>
-     
+    
         if (checkAuth()) {
             window.location.href = 'home.html';
         }
@@ -46,7 +46,7 @@
             const password = document.getElementById('password').value;
 
             if (login(username, password)) {
-                window.location.href = 'home.html'; /
+                window.location.href = 'home.html'; 
             } else {
                 errorMessage.textContent = 'Invalid username or password! Please try again.';
                 errorMessage.style.color = 'red';
