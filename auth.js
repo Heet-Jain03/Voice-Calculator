@@ -13,7 +13,6 @@ function login(username, password) {
     return false;
 }
 
-
 function register(username, email, password) {
     const users = JSON.parse(localStorage.getItem('users')) || {};
     
@@ -25,7 +24,6 @@ function register(username, email, password) {
         return false; 
     }
     
-    
     users[username] = { email: email, password: password };
     localStorage.setItem('users', JSON.stringify(users));
     return true;
@@ -33,11 +31,12 @@ function register(username, email, password) {
 
 function logout() {
     sessionStorage.removeItem('sessionUser');
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';  // Redirect to the login page
 }
 
-if (window.location.pathname.endsWith('index.html')) {
+// Check authentication on page load
+if (window.location.pathname.endsWith('home.html')) {
     if (!checkAuth()) {
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';  // Redirect to the login page if not logged in
     }
 }
