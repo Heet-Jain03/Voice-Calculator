@@ -18,7 +18,7 @@ function login(username, password) {
 
 function register(username, email, password) {
     const users = JSON.parse(localStorage.getItem('users')) || {};
-
+    const existingUsers = Object.values(users);
     const usernameExists = users[username] !== undefined;
     const emailExists = Object.values(users).some(user => user.email === email);
 
