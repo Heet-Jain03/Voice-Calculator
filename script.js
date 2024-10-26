@@ -2,7 +2,7 @@ const startButton = document.getElementById('start-button');
 const resultDiv = document.getElementById('result');
 const historyList = document.getElementById('history-list');
 const clearHistoryButton = document.querySelector('.clear-history');
-const usernameDisplay = document.getElementById('username-display');
+const usernameDisplay = document.getElementById('username-display'); 
 
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.interimResults = false;
@@ -10,15 +10,22 @@ recognition.lang = 'en-US';
 
 function displayUsername() {
     const username = sessionStorage.getItem('sessionUser');
-    usernameDisplay.textContent = username ? `Welcome, ${username}!` : ''; 
+    if (username) {
+        usernameDisplay.textContent = `Welcome, ${username}!`;
+    } else {
+        usernameDisplay.textContent = ''; 
+    }
 }
 
-window.onload = displayUsername;
+window.onload = () => {
+    displayUsername(); 
+};
 
 startButton.addEventListener('click', () => {
     recognition.start();
     updateResult('', 'Listening...');
     startButton.disabled = true;
+    updateButtonState(true);
 });
 
 recognition.addEventListener('result', (event) => {
@@ -30,6 +37,7 @@ recognition.addEventListener('result', (event) => {
 recognition.addEventListener('end', () => {
     const currentResult = resultDiv.querySelector('.result-text')?.textContent || '';
     updateResult(currentResult, '(Stopped listening)');
+    updateButtonState(false);
     startButton.disabled = false;
 });
 
@@ -58,18 +66,22 @@ function calculateResult(input) {
             calculatePercentOf(lowerInput);
             return;
         }
+
         if (lowerInput.includes('square root of')) {
             calculateSquareRoot(lowerInput);
             return;
         }
+
         if (lowerInput.includes('square of')) {
             calculateSquare(lowerInput);
             return;
         }
+
         if (lowerInput.includes('celsius to fahrenheit')) {
             convertCelsiusToFahrenheit(lowerInput);
             return;
         }
+
         if (lowerInput.includes('fahrenheit to celsius')) {
             convertFahrenheitToCelsius(lowerInput);
             return;
@@ -82,9 +94,14 @@ function calculateResult(input) {
 }
 
 function calculatePercentOf(input) {
-    let parts = input.includes('percent of') 
-        ? input.split('percent of') 
-        : input.split('% of');
+    let parts;
+    if (input.includes('percent of')) {
+        parts = input.split('percent of');
+    } else if (input.includes('% of')) {
+        parts = input.split('% of');
+    } else {
+        return;
+    }
     
     const value = extractNumber(parts[0]);
     const total = extractNumber(parts[1]);
@@ -97,6 +114,7 @@ function calculateSquareRoot(input) {
     const result = Math.sqrt(value);
     displayResult(`Square root of ${value} = ${result}`, result);
 }
+
 function calculateSquare(input) {
     const value = extractNumber(input);
     const result = Math.pow(value, 2);
@@ -124,10 +142,9 @@ function evaluateExpression(lowerInput, originalInput) {
         .replace(/divided by/g, '/')
         .replace(/x/g, '*');
 
-    const result = eval(formattedInput); 
+    const result = eval(formattedInput);
     displayResult(`${originalInput} = ${result}`, result);
 }
-
 
 function extractNumber(input) {
     const matches = input.match(/-?\d+(\.\d+)?/);
@@ -149,7 +166,6 @@ function addToHistory(calculation) {
         historyList.removeChild(historyList.lastChild);
     }
 }
-
 
 clearHistoryButton.addEventListener('click', () => {
     while (historyList.firstChild) {
