@@ -31,8 +31,9 @@
 
     <script src="auth.js"></script>
     <script>
+        // Redirect to home if already authenticated
         if (checkAuth()) {
-            window.location.href = 'index.html';
+            window.location.href = 'home.html';
         }
 
         const loginForm = document.getElementById('login-form');
@@ -45,9 +46,10 @@
             const password = document.getElementById('password').value;
 
             if (login(username, password)) {
-                window.location.href = 'index.html';
+                window.location.href = 'home.html'; // Redirect to home page on successful login
             } else {
-                errorMessage.textContent = 'Invalid username or password!';
+                errorMessage.textContent = 'Invalid username or password! Please try again.';
+                errorMessage.style.color = 'red';
             }
         });
     </script>
@@ -58,6 +60,11 @@
             color: blue; 
             cursor: pointer; 
             text-align: center; 
+            margin-top: 10px;
+        }
+        .error {
+            color: red;
+            text-align: center;
             margin-top: 10px;
         }
     </style>
